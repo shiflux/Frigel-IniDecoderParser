@@ -21,13 +21,13 @@ class IniDecoderParser:
             code = "1:anin:" + splitted[0].strip()
             name = splitted[2].strip()
             unit = splitted[2].strip().strip('_')
-            self.ini_dict["AnIn"].append({"CODE": code, "FAMILY_ID": self.family, "UNIT": unit, "NAME": name})
+            self.ini_dict["Analog"].append({"CODE": code, "FAMILY_ID": self.family, "UNIT": unit, "NAME": name})
         elif line.startswith("AO"):
             splitted = line.split('=', 1)[1].split(',')
             code = "1:anout:" + splitted[0].strip()
             name = splitted[2].strip()
             unit = splitted[2].strip().strip('_')
-            self.ini_dict["AnOut"].append({"CODE": code, "FAMILY_ID": self.family, "UNIT": unit, "NAME": name})
+            self.ini_dict["Analog"].append({"CODE": code, "FAMILY_ID": self.family, "UNIT": unit, "NAME": name})
         elif line.startswith("CMD"):
             splitted = line.split('=', 1)[1].split(';')
             code = "1:command:" + splitted[0].strip()
@@ -37,7 +37,7 @@ class IniDecoderParser:
             splitted = line.split('=', 1)[1].split(',')
             code = "1:alarm:" + splitted[0].strip()
             name = splitted[1].strip()
-            self.ini_dict["Alarm"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
+            self.ini_dict["Digital"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
         elif line.startswith("SETUP"):
             splitted = line.split('=', 1)[1].split(';')
             temp_s = splitted[0].strip()
@@ -56,24 +56,20 @@ class IniDecoderParser:
             splitted = line.split('=', 1)[1].split(',')
             code = "1:digin:" + splitted[0].strip()
             name = splitted[1].strip()
-            self.ini_dict["DigIn"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
+            self.ini_dict["Digital"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
         elif line.startswith("DO"):
             splitted = line.split('=', 1)[1].split(',')
             code = "1:digout:" + splitted[0].strip()
             name = splitted[1].strip()
-            self.ini_dict["DigOut"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
+            self.ini_dict["Digital"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
         elif line.startswith("STS"):
             splitted = line.split('=', 1)[1].split(',')
             code = "1:status:" + splitted[1].strip()
             name = splitted[2].strip()
-            self.ini_dict["Status"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
+            self.ini_dict["Digital"].append({"CODE": code, "FAMILY_ID": self.family, "NAME": name})
 
     def create_dict(self):
-        self.ini_dict["AnIn"] = []
-        self.ini_dict["AnOut"] = []
-        self.ini_dict["Alarm"] = []
+        self.ini_dict["Analog"] = []
+        self.ini_dict["Digital"] = []
         self.ini_dict["Command"] = []
         self.ini_dict["Setup"] = []
-        self.ini_dict["DigIn"] = []
-        self.ini_dict["DigOut"] = []
-        self.ini_dict["Status"] = []
