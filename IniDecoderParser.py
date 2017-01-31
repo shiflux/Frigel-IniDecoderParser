@@ -58,6 +58,7 @@ class IniDecoderParser:
             temp_s = splitted[0].strip()
             code = "1:setup:" + temp_s[temp_s.find("(") + 1:temp_s.find(")")]
             name = splitted[0].strip()
+            type = splitted[2].strip()
             unit = splitted[6].strip().strip('_')
             min_value = float(splitted[8].strip())
             max_value = float(splitted[7].strip())
@@ -67,8 +68,8 @@ class IniDecoderParser:
                 possibile_values = ''
             self.ini_dict["setup"].append({
                 "code": code, "family_id": self.family, "unit": unit,
-                "name": name, "min_value": min_value, "max_value": max_value,
-                "possible_values": possibile_values
+                "name": name,  "type": type, "min_value": min_value,
+                "max_value": max_value, "possible_values": possibile_values
             })
         elif line.startswith("DI"):
             splitted = line.split('=', 1)[1].split(',')
